@@ -5,4 +5,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `geth --datadir eth console`
+### `geth --datadir ./eth --networkid 2018 --port 30306 --nodiscover --rpc --rpcapi “db,personal,eth,net,web3,debug” --rpccorsdomain=”*” --rpcaddr=”localhost” --rpcport 8545 --ws --wsapi "db,personal,eth,net,web3,debug" --wsorigins="*"  --wsaddr="localhost" --wsport 8546 console`
+
+Run Go Ethereum on "ws://localhost:8546"

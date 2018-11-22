@@ -15,7 +15,7 @@ import abi from '../contracts/landContract.json';
 let web3 = new Web3();
 web3.setProvider(
     new Web3.providers.WebsocketProvider(
-       //TODO: local blockchain websocket address e.g. 'ws://localhost:8546'
+       'ws://localhost:8546'
     )
 );
 
