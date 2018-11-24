@@ -14,3 +14,73 @@
 13:03:49.801112 version@stat F·[1] S·553B[553B] Sc·[0.25]
 13:03:49.816074 db@janitor F·3 G·0
 13:03:49.817071 db@open done T·44.2064ms
+=============== Nov 23, 2018 (+07) ===============
+12:40:28.242201 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:40:28.260494 version@stat F·[1] S·553B[553B] Sc·[0.25]
+12:40:28.260494 db@open opening
+12:40:28.261048 journal@recovery F·1
+12:40:28.266480 journal@recovery recovering @3
+12:40:28.290650 memdb@flush created L0@5 N·2 S·238B "Dat..ion,v11":"Las..der,v12"
+12:40:28.294704 version@stat F·[2] S·791B[791B] Sc·[0.50]
+12:40:28.314585 db@janitor F·4 G·0
+12:40:28.314585 db@open done T·53.5369ms
+=============== Nov 23, 2018 (+07) ===============
+13:12:17.380990 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+13:12:17.382000 version@stat F·[2] S·791B[791B] Sc·[0.50]
+13:12:17.382000 db@open opening
+13:12:17.382000 journal@recovery F·1
+13:12:17.385171 journal@recovery recovering @6
+13:12:17.391967 memdb@flush created L0@8 N·893 S·44KiB "Dat..ion,v14":"r\x00\x00..\xc8pW,v902"
+13:12:17.396947 version@stat F·[3] S·45KiB[45KiB] Sc·[0.75]
+13:12:17.415923 db@janitor F·5 G·0
+13:12:17.415923 db@open done T·33.9229ms
+13:12:17.451857 table@compaction L0·3 -> L1·0 S·45KiB Q·908
+13:12:17.456488 table@build created L1@11 N·605 S·33KiB "Dat..ion,v14":"r\x00\x00..\xc8pW,v902"
+13:12:17.456488 version@stat F·[0 1] S·33KiB[0B 33KiB] Sc·[0.00 0.00]
+13:12:17.457836 table@compaction committed F-2 S-11KiB Ke·0 D·299 T·5.9787ms
+13:12:17.457836 table@remove removed @8
+13:12:17.457836 table@remove removed @5
+13:12:17.458806 table@remove removed @2
+=============== Nov 23, 2018 (+07) ===============
+14:31:30.171617 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:31:30.172614 version@stat F·[0 1] S·33KiB[0B 33KiB] Sc·[0.00 0.00]
+14:31:30.172614 db@open opening
+14:31:30.172614 journal@recovery F·1
+14:31:30.175630 journal@recovery recovering @9
+14:31:30.188571 memdb@flush created L0@12 N·1434 S·74KiB "Dat..ion,v908":"r\x00\x00..\u007f\x86\xb1,v2337"
+14:31:30.192587 version@stat F·[1 1] S·107KiB[74KiB 33KiB] Sc·[0.25 0.00]
+14:31:30.222585 db@janitor F·4 G·0
+14:31:30.222585 db@open done T·49.9701ms
+14:44:39.618826 db@close closing
+14:44:39.623852 db@close done T·5.0256ms
+=============== Nov 24, 2018 (+07) ===============
+14:39:57.660952 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:39:57.661952 version@stat F·[1 1] S·107KiB[74KiB 33KiB] Sc·[0.25 0.00]
+14:39:57.661952 db@open opening
+14:39:57.662978 journal@recovery F·1
+14:39:57.670574 journal@recovery recovering @13
+14:39:57.677558 memdb@flush created L0@15 N·149 S·6KiB "Dat..ion,v2343":"\xee\f\t..\x885\x87,v2490"
+14:39:57.681600 version@stat F·[2 1] S·114KiB[80KiB 33KiB] Sc·[0.50 0.00]
+14:39:57.699122 db@janitor F·5 G·0
+14:39:57.699122 db@open done T·37.1696ms
+14:41:25.314570 table@compaction L0·2 -> L1·1 S·114KiB Q·2494
+14:41:25.325529 table@build created L1@18 N·1544 S·90KiB "Dat..ion,v2343":"\xee\f\t..\x885\x87,v2490"
+14:41:25.325529 version@stat F·[0 1] S·90KiB[0B 90KiB] Sc·[0.00 0.00]
+14:41:25.328587 table@compaction committed F-2 S-23KiB Ke·0 D·644 T·14.0172ms
+14:41:25.328587 table@remove removed @15
+14:41:25.328587 table@remove removed @12
+14:41:25.329556 table@remove removed @11
+14:42:43.155424 db@close closing
+14:42:43.162401 db@close done T·6.9764ms
+=============== Nov 24, 2018 (+07) ===============
+14:42:50.376767 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:42:50.377765 version@stat F·[0 1] S·90KiB[0B 90KiB] Sc·[0.00 0.00]
+14:42:50.377765 db@open opening
+14:42:50.377765 journal@recovery F·1
+14:42:50.380757 journal@recovery recovering @16
+14:42:50.392765 memdb@flush created L0@19 N·2 S·239B "Dat..ion,v2493":"Las..der,v2494"
+14:42:50.395754 version@stat F·[1 1] S·90KiB[239B 90KiB] Sc·[0.25 0.00]
+14:42:50.412672 db@janitor F·4 G·0
+14:42:50.412672 db@open done T·34.9072ms
+14:51:05.143055 db@close closing
+14:51:05.153031 db@close done T·9.9762ms

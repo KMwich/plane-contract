@@ -21,8 +21,14 @@ web3.setProvider(
 
 export const login = (address, password) => {
     return dispatch => {
-        //TODO: using web3 login and unlock the account
-        console.log('Login not yet implemented');
+        web3.eth.personal.unlockAccount(address, password, 600)
+            .then((response) => {
+                console.info('Login successful:', response)
+                dispatch({ type: LOGIN_SUCCESSFUL, payload: address });
+            }).catch(error => {
+                console.log('Login Error:', error)
+                dispatch({ type: LOGIN_FAILED, payload: null });
+            })
     }
 }
 
@@ -32,8 +38,14 @@ export const logout = () => {
 
 export const signup = (password) => {
     return dispatch => {
-        // TODO using web3 create a new accoutn on the blockchain
-        console.log('sign up not yet implemented');
+        web3.eth.personal.newAccount(password)
+            .then(response => {
+                console.info('new account ', response);
+                dispatch({ type: SIGNUP_SUCCEEDED, payload: response })
+            }).catch(error => {
+                console.error('error creating account ', error);
+                dispatch({ type: SIGNUP_FAILED })
+            })
     }
 }
 
