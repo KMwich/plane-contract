@@ -1,8 +1,9 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.4.25;
+pragma experimental ABIEncoderV2;
 
 contract PlaneContract {
     address owner;
-    mapping (address => uint) public balances;
+    mapping (address => uint) balances;
     
     struct Seat {
         address owner;
@@ -10,101 +11,79 @@ contract PlaneContract {
         uint price;
     }
     
-    Seat[40] public seats;
+    struct Plane {
+        address owner;
+        mapping (address => uint) balances;
+        string time;
+        Seat[40] seats;
+    }
+    
+    Plane[3] public planes;
     
     event SeatOwnerChanged(
+        uint plane,
         uint row,
         uint column
     );
     
-    event SeatPriceChanged(
-        uint row,
-        uint column,
-        uint price
-    );
-    
-    event SeatAvailabilityChanged(
-        uint row,
-        uint column,
-        uint price,
-        bool forSale
-    );
-    
     constructor() public {
         owner = msg.sender;
-        for (uint i = 0; i < 10; i++) {
-            for (uint j = 0; j < 4; j++) {
-                seats[i * 4 + j].forSale = true;
-                seats[i * 4 + j].price = (i > 3)?4000:6000;
+        for (uint p = 0; p < 3; p ++) {
+            if (p == 0) {
+                planes[p].owner = 0xcc936022fee0ab209ada8f464b0fa9599046d2aa;
+                planes[p].time = "10:00 - 11:00";
+            } else if (p == 1) {
+                planes[p].owner = 0x2d8d79f433665712596cf7ad52bbafc3dabf5724;
+                planes[p].time = "12:00 - 13:00";
+            } else {
+                planes[p].owner = 0x53311a323c5ab9df9ae920dd51ebfd5ca58db82a;
+                planes[p].time = "14:00 - 15:00";
+            }
+            
+            for (uint i = 0; i < 10; i++) {
+                for (uint j = 0; j < 4; j++) {
+                    planes[p].seats[i * 4 + j].forSale = true;
+                    planes[p].seats[i * 4 + j].price = (i > 3)?4000:6000;
+                }
             }
         }
     }
     
-    function getSeats() public view returns(address[], bool[], uint[]) {
+    function getPlanes() public view returns(string[] memory) {
+        string[] memory time = new string[](3);
+        for (uint p = 0; p < 3; p++) {
+            time[p] = planes[p].time;
+        }
+        
+        return (time);
+    }
+    
+    function getSeats(uint index) public view returns(address[] memory, bool[] memory, uint[] memory) {
         address[] memory addrs = new address[](40);
         bool[] memory available = new bool[](40);
         uint[] memory price = new uint[](40);
         
         for (uint i = 0; i < 10; i++) {
             for (uint j = 0; j < 4; j++) {
-                addrs[i * 4 + j] = seats[i * 4 + j].owner;
-                available[i * 4 + j] = seats[i * 4 + j].forSale;
-                price[i * 4 + j] = seats[i * 4 + j].price;
+                addrs[i * 4 + j] = planes[index].seats[i * 4 + j].owner;
+                available[i * 4 + j] = planes[index].seats[i * 4 + j].forSale;
+                price[i * 4 + j] = planes[index].seats[i * 4 + j].price;
             }
         }
         
         return (addrs, available, price);
     }
     
-    function saleOwnerSeat(uint row, uint column, uint price) public {
-        Seat storage seat = seats[row * 4 + column];
-        
-        require(msg.sender == seat.owner && price > 0);
-        
-        seat.forSale = true;
-        seat.price = price;
-        emit SeatAvailabilityChanged(row, column, price, true);
-    }
-    
-    function cancelSaleSeat(uint row, uint column) public {
-        Seat storage seat = seats[row * 4 + column];
-        
-        require(msg.sender == seat.owner);
-        
-        seat.forSale = false;
-        emit SeatAvailabilityChanged(row, column, seat.price, false);
-    }
-    
-    function buySeat(uint row, uint column) public payable {
-        Seat storage seat = seats[row * 4 + column];
+    function buySeat(uint index, uint row, uint column) public payable {
+        Seat storage seat = planes[index].seats[row * 4 + column];
         
         require(msg.sender != seat.owner && seat.forSale && msg.value >= seat.price);
         
-        if(seat.owner == 0x0) {
-            balances[owner] += msg.value;
-        }else {
-            balances[seat.owner] += msg.value;
-        }
-        
+        require(((seat.owner == 0x0)? planes[index].owner: seat.owner).send(msg.value));
+
         seat.owner = msg.sender;
         seat.forSale = false;
         
-        emit SeatOwnerChanged(row, column);
-    }
-    
-    function withdrawFunds() public {
-        address payee = msg.sender;
-            uint payment = balances[payee];
-    
-            require(payment > 0);
-    
-            balances[payee] = 0;
-            require(payee.send(payment));
-    }
-    
-    
-    function destroy() payable public {
-        require(msg.sender == owner);
-        selfdestruct(owner);
+        emit SeatOwnerChanged(index, row, column);
     }
 }

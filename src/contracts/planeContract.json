@@ -1,89 +1,12 @@
 [
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "row",
-				"type": "uint256"
-			},
-			{
-				"name": "column",
-				"type": "uint256"
-			}
-		],
-		"name": "cancelSaleSeat",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "withdrawFunds",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "balances",
-		"outputs": [
-			{
-				"name": "",
+				"name": "index",
 				"type": "uint256"
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "seats",
-		"outputs": [
-			{
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"name": "forSale",
-				"type": "bool"
-			},
-			{
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "destroy",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
 		"name": "getSeats",
 		"outputs": [
 			{
@@ -104,8 +27,49 @@
 		"type": "function"
 	},
 	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "planes",
+		"outputs": [
+			{
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"name": "time",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getPlanes",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			},
 			{
 				"name": "row",
 				"type": "uint256"
@@ -122,28 +86,6 @@
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "row",
-				"type": "uint256"
-			},
-			{
-				"name": "column",
-				"type": "uint256"
-			},
-			{
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"name": "saleOwnerSeat",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -152,6 +94,11 @@
 	{
 		"anonymous": false,
 		"inputs": [
+			{
+				"indexed": false,
+				"name": "plane",
+				"type": "uint256"
+			},
 			{
 				"indexed": false,
 				"name": "row",
@@ -164,55 +111,6 @@
 			}
 		],
 		"name": "SeatOwnerChanged",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "row",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "column",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"name": "SeatPriceChanged",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "row",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "column",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "price",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "forSale",
-				"type": "bool"
-			}
-		],
-		"name": "SeatAvailabilityChanged",
 		"type": "event"
 	}
 ]
