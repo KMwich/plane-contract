@@ -27,13 +27,6 @@ class MainNav extends React.Component {
                             </NavItem>
                     }
                     {
-                        this.props.userId ? 
-                            null :
-                            <NavItem eventKey={2} onClick={this.props.onSignupClicked}>
-                                Sign Up
-                            </NavItem>
-                    }
-                    {
                         this.props.userId ?
                             <NavItem eventKey={4} onClick={this.props.onLogoutClicked}>
                                 Log Out
