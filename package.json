@@ -3,7 +3,9 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"ganache-cli": "^6.2.3",
 		"jquery": "^3.3.1",
+		"mocha": "^5.2.0",
 		"react": "^16.6.3",
 		"react-bootstrap": "^0.32.4",
 		"react-dom": "^16.6.3",
@@ -14,7 +16,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test",
+		"test": "mocha \"./test.js\"",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {

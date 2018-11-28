@@ -24,17 +24,17 @@ contract PlaneContract {
         uint column
     );
     
-    constructor() public {
+    constructor(address[] addr) public {
         owner = msg.sender;
         for (uint p = 0; p < 3; p ++) {
             if (p == 0) {
-                planes[p].owner = 0xcc936022fee0ab209ada8f464b0fa9599046d2aa;
+                planes[p].owner = addr[0];
                 planes[p].time = "10:00 - 11:00";
             } else if (p == 1) {
-                planes[p].owner = 0x2d8d79f433665712596cf7ad52bbafc3dabf5724;
+                planes[p].owner = addr[1];
                 planes[p].time = "12:00 - 13:00";
             } else {
-                planes[p].owner = 0x53311a323c5ab9df9ae920dd51ebfd5ca58db82a;
+                planes[p].owner = addr[2];
                 planes[p].time = "14:00 - 15:00";
             }
             

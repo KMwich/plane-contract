@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const solc = require('solc');
 const express = require('express');
+const ganache = require('ganache-cli');
 
 var app = express();
 app.use(express.json())
@@ -12,47 +13,33 @@ app.use((req, res, next) => {
     next();
 });
 
-let web3 = new Web3();
-web3.setProvider(
-    new Web3.providers.WebsocketProvider(
-        'ws://localhost:8546'
-    )
-)
+const provider = ganache.provider({ gasLimit: 8000000 });
+const web3 = new Web3(provider);
 
 let contract;
 
 const codePath = path.resolve(__dirname, "contracts", "planeContract.sol")
 const code = fs.readFileSync(codePath, 'utf8')
-const compile = solc.compile(code, 1).contracts[':PlaneContract']
+const {bytecode,interface} = solc.compile(code, 1).contracts[':PlaneContract']
 
-web3.eth.getAccounts().then(accounts => 
-    web3.eth.personal.unlockAccount(accounts[0], '1111')
-    .then(res => {
-        (new web3.eth.Contract(JSON.parse(compile.interface)).deploy({data: "0x" + compile.bytecode}).send({from: accounts[0], gas: 6000000}))
-            .then(res => {
-                contract = res
-                app.listen(8080, () => console.log(`listening on port 8080!`))
-            }) 
-    }).catch(err => {
-    })
-)
-
-app.post('/login', (req, res) => {
-    web3.eth.personal.unlockAccount( req.body.address, req.body.password)
-        .then(result => {
-            res.sendStatus(200)
-        }).catch(err => {
-            res.sendStatus(403)
-        })
+web3.eth.getAccounts().then(accounts => {
+    console.log(accounts);
+    (new web3.eth.Contract(JSON.parse(interface)).deploy({data: '0x' + bytecode, arguments: [accounts]}).send({from: accounts[0], gas: 8000000}))
+        .then(res => {
+            contract = res
+            app.listen(8080, () => console.log(`listening on port 8080!`))
+        }).catch(err => console.log(err))
 })
 
-app.post('/signup', (req, res) => {
-    web3.eth.personal.newAccount(req.body.password)
-        .then(address => {
-            res.status(200).send(address)
-        }).catch(err => {
-            res.sendStatus(403)
-        })
+app.post('/login', (req, res) => {
+    web3.eth.getAccounts()
+        .then(accounts => {
+            if (accounts.includes(req.body.address)) {
+                res.sendStatus(200)
+            } else {
+                res.sendStatus(403)
+            }
+        }).catch(err => res.sendStatus(403))
 })
 
 app.post('/flights', (req, res) => {
