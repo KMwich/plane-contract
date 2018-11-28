@@ -3,7 +3,6 @@ pragma experimental ABIEncoderV2;
 
 contract PlaneContract {
     address owner;
-    mapping (address => uint) balances;
     
     struct Seat {
         address owner;
@@ -13,7 +12,6 @@ contract PlaneContract {
     
     struct Plane {
         address owner;
-        mapping (address => uint) balances;
         string time;
         Seat[40] seats;
     }
